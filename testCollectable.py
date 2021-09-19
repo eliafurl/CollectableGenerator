@@ -1,7 +1,14 @@
 from collectable import Collectable
 
-if __name__=="__main__":
-    c = Collectable("Test", 3, "./test")
-    print(c)
+def main():
+    project = 'Test'
+    id_number = 3
+    main_folder = 'TestProject'
 
-    print("DONE!")
+    new_collectable = Collectable(project, id_number, main_folder)
+
+    print(new_collectable)
+
+if __name__=='__main__':
+    main()
+    print('DONE!')
