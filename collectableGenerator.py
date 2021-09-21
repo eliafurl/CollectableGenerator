@@ -1,5 +1,6 @@
 # Implementation of the CollectableGenerator class
 from collectable import Collectable
+from utilities import *
 
 class CollectableGenerator:
     def __init__(self, project, main_folder):
@@ -14,6 +15,7 @@ class CollectableGenerator:
         id_number = len(self.collectables) + 1
         new_collectable = Collectable(self.project, id_number, self.main_folder)
         self.collectables.append(new_collectable)
+
 
     def __str__(self):
         return 'Collectable generator of {} project.\nActual number of collectables = {}\n'.format(self.project, len(self.collectables))
