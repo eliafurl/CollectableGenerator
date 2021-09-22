@@ -1,25 +1,21 @@
 #Collection of utilities funcitons for collectableGenerator
 import cv2 as cv
 
-def stackLayers(underlay_layer, overlay_layer):
-    # Create a ROI on the underlay image
-    rows,cols,channels = overlay_layer.shape
-    roi = underlay_layer[0:rows, 0:cols]
+def stackLayers(background, foreground):
+    '''
+    This function overlay two RGBA images of the same size, using the 
+    alpha composition (https://en.wikipedia.org/wiki/Alpha_compositing).
+    '''
+    # normalize alpha channels from 0-255 to 0-1
+    alpha_background = background[:,:,3] / 255.0
+    alpha_foreground = foreground[:,:,3] / 255.0
 
-    # Create a mask and its inverse of the overlay image
-    img2gray = cv.cvtColor(overlay_layer, cv.COLOR_BGR2GRAY)
-    ret, mask = cv.threshold(img2gray, 1, 255, cv.THRESH_BINARY)
-    mask_inv = cv.bitwise_not(mask)
+    # set adjusted colors
+    for color in range(0, 3):
+        background[:,:,color] = alpha_foreground * foreground[:,:,color] + \
+            alpha_background * background[:,:,color] * (1 - alpha_foreground)
 
-    # Black-out the area of the non-black overlay layer in ROI
-    target_underlay_layer = cv.bitwise_and(roi, roi, mask = mask_inv)
+    # set adjusted alpha and denormalize back to 0-255
+    background[:,:,3] = (1 - (1 - alpha_foreground) * (1 - alpha_background)) * 255
 
-    # Take only region of not-black pixels from overlay layer
-    target_overlay_layer = cv.bitwise_and(overlay_layer, overlay_layer, mask = mask)
-
-    # Put overlay in ROI and modify the main layer
-    stacked_layer = cv.add(target_underlay_layer, target_overlay_layer)
-
-    #underlay_layer[0:rows, 0:cols] = stacked_layer #Needed if the overlay layer has different dimension
-
-    return stacked_layer
+    return background

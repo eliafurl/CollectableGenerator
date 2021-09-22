@@ -5,11 +5,13 @@ import pdb
 def main():
     bg_layer_path = 'TestProject/images/BG/BG-GREEN.png'
     core_layer_path = 'TestProject/images/CORE/CORE-BLU.png'
-    
-    bg_layer = cv.imread(bg_layer_path, cv.IMREAD_COLOR)
-    core_layer = cv.imread(core_layer_path, cv.IMREAD_COLOR)
+
+    bg_layer = cv.imread(bg_layer_path, cv.IMREAD_UNCHANGED)
+    core_layer = cv.imread(core_layer_path, cv.IMREAD_UNCHANGED)
 
     result = stackLayers(bg_layer, core_layer)
+
+    cv.imwrite('stackLayers_result.png', result)
 
     to_display_img = [bg_layer, core_layer, result]
     to_display_names = [bg_layer_path, core_layer_path, 'Result']
