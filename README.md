@@ -1,7 +1,8 @@
 # Collectable Generator Project
+This repository contains the Collectable Generator. It is a simple tool for generating random collectables from sample pngs, stacking a defined number of layers and exporting the final image as png. OpenCV has been used for the image processing.
 
 ### Project Folder structure:
-'''
+```
 testProject:
 |
 |-- source_layers:
@@ -20,5 +21,14 @@ testProject:
 |   |   |-- STAR-3.png
 |   |   |-- STAR-4.png
 |
-|-- TBD
-'''
+|-- TBD: exported collectable pngs
+```
+
+### CollectableGenerator
+This is a class used for creating a collectable project. It contains all the possible attributes, all the methods for the generation and export of all the collectables. 
+
+### Collectable
+This is a class for storing all the informations about a single collectable. 
+
+### Utilities
+This is a collection of useful methods.
