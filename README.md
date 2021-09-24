@@ -25,7 +25,9 @@ testProject:
 ```
 
 ### CollectableGenerator
-This is a class used for creating a collectable project. It contains all the possible attributes, all the methods for the generation and export of all the collectables. 
+This is a class used for creating a collectable project. It contains all the possible attributes, all the methods for the generation and export of all the collectables.
+
+A collectable is identified by a fixed number of attributes. Each attribute represent a layer, each layer has a defined position in the stack. To each layer correspond an attribute.
 
 ### Collectable
 This is a class for storing all the informations about a single collectable. 
