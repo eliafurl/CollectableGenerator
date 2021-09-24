@@ -13,34 +13,36 @@ class CollectableGenerator:
         # String of the path to the main folder of the project
         self.project_folder = project_folder
         attributes_path = join(project_folder, 'source_layers')
-        self.attributes = self.loadAttributes(attributes_path)
+        # dictionary for storing all the layers and its attributes name and location
+        self.attributes = {}
+        self.loadAttributes(attributes_path)
 
     def loadAttributes(self,attributes_path):
+        '''
+        Function for loading all the attributes as dictionary as follows: e.g. layer 00
+        self.attributes = { '00' : ('BG', attribute_dictionary)}
+        attribute_dictionary = {'GREEN', 'absolute/path/to/png'}
+        '''
+        # find all the layers folders
         attributes_dir = os.listdir(attributes_path)
-        attributes = {}
+        # store in a dictionary an item for each layer with:
+        # key = layer_number
+        # value = (attribute_name, attribute_dictionary) 
         for attribute_dir in sorted(attributes_dir):
             if isdir(join(attributes_path, attribute_dir)):
+                temp = attribute_dir.split('-')
+                layer_number = temp[0] # key
+                attribute_name = temp[1]
                 attribute_dictionary = {}
-                '''
-                TODO: fix this into the following:
-                attributes = { '00' : ('BG', attributes_dictionary)}
-                attributes_dictionary = {'GREEN', 'absolute/path/to/png'}
-                '''
                 for attribute in os.listdir(join(attributes_path, attribute_dir)):
                     temp = attribute.split('-')
-                    key = temp[0]
-                    value = temp[1][:-4]
-                    #print('key = {}\nvalue = {}\n\n'.format(key, value))
+                    key = temp[1][:-4]
+                    value = join(attributes_path, attribute_dir, attribute)
+                    # print('key = {}\nvalue = {}\n\n'.format(key, value))
                     attribute_dictionary[key] = value
-                print(attribute_dir)
+                # print(attribute_dir)
                 attribute_layer = attribute_dir.split('-')[0]
-                print('attribute_name = {}\nattribute_dictionary = {}\n\n'.format(attribute_name, attribute_dictionary))
-                attributes[attribute_layer] = attribute_dictionary
-
-
-
-        print(attributes_dir)
-        return attributes
+                self.attributes[layer_number] = (attribute_name, attribute_dictionary)
 
     def addCollectable(self):
         id_number = len(self.collectables) + 1
@@ -69,5 +71,3 @@ class CollectableGenerator:
                 * STAR-4.png
             ---------------------
         '''
-        # attributes = { '00' : ('BG', attributes_dictionary)}
-        # attributes_dictionary = {'GREEN', 'absolute/path/to/png'}
