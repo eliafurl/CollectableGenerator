@@ -1,5 +1,6 @@
 #Collection of utilities funcitons for collectableGenerator
 import cv2 as cv
+import json
 
 def stackLayers(background, foreground):
     '''
@@ -19,3 +20,19 @@ def stackLayers(background, foreground):
     background[:,:,3] = (1 - (1 - alpha_foreground) * (1 - alpha_background)) * 255
 
     return background
+
+def metadataJsonExport(metadata, json_export_file):
+    '''
+    This function allows to export the metadata dictionary as a json file specified
+    by json_export_file
+    '''
+    with open(json_export_file, 'w') as json_file:
+        json.dump(metadata, json_file, indent = 4, sort_keys = False)
+
+def metadataJsonImport(json_import_file):
+    '''
+    This function returns the metadata dictionary loaded form a json file specified
+    by json_import_file
+    '''
+    with open(json_import_file) as json_file:
+        return json.load(json_file)
