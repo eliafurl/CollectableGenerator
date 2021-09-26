@@ -1,9 +1,13 @@
 {
-    "name": "testName",
-    "project": "TestProject",
+    "name": "CollectableName",
+    "project": "ProjectName",
     "numberID": "01",
     "hashID": "",
     "image": "IPFS URI",
-    "attributes": ["BG-GREEN", "CORE-BLU", "STAR-1"],
-    "author": "me",
+    "attributes": [
+        "<ATTRIBUTE-1-VALUE>",
+        "<ATTRIBUTE-...-VALUE>",
+        "<ATTRIBUTE-N-VALUE>"
+    ],
+    "author": "authorName"
 }

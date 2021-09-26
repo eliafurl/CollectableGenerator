@@ -32,5 +32,17 @@ A collectable is identified by a fixed number of attributes. Each attribute repr
 ### Collectable
 This is a class for storing all the informations about a single collectable. 
 
+#### Collectable Metadata
+* name
+* project
+* numberID
+* *hashID: HASH obtained by combination of attributes NEEDED?*
+* image: IPFS URI (Uniform Resource Identifier)
+* attributes
+    - attribute-1-value
+    - ...
+    - attribute-N-value
+* author
+
 ### Utilities
 This is a collection of useful methods.
