@@ -1,0 +1,13 @@
+{
+    "name": "testName",
+    "project": "TestProject",
+    "numberID": "01",
+    "hashID": "",
+    "image": "IPFS URI",
+    "attributes": [
+        "BG-GREEN",
+        "CORE-BLU",
+        "STAR-1"
+    ],
+    "author": "me"
+}
