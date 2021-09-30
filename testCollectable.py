@@ -6,9 +6,11 @@ def main():
     attributes_names = ('BG', 'CORE', 'STAR')
     attributes_values = ('GREEN', 'BLU', '1')
 
-    new_collectable = Collectable(project, id_number, attributes_names, attributes_values)
+    new_collectable = Collectable(project, id_number, attributes_names, attributes_values, [])
 
     print(new_collectable)
+    print('Hash = {}'.format(hash(new_collectable)))
+    assert(new_collectable.identifier == hash(new_collectable))
 
 if __name__=='__main__':
     main()
