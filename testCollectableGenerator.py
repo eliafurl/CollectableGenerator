@@ -7,9 +7,11 @@ def main():
     
     # import pdb; pdb.set_trace()
 
-    collectableGenerator.createCollectable()
+    collectableGenerator.createCollectable('random_uniform')
 
     print(collectableGenerator)
+    for collectable in collectableGenerator.collectables:
+        print(collectableGenerator.collectables[collectable])
 
 
 

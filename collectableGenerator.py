@@ -3,11 +3,12 @@ from collectable import Collectable
 from utilities import *
 import os
 from os.path import isdir, join
+import random
 
 class CollectableGenerator:
     def __init__(self, project, project_folder):
-        # List containing all the collectables objects
-        self.collectables = []
+        # Dictionary containing all the collectables objects and their identifier as key
+        self.collectables = {}
         # String of the project name
         self.project = project
         # String of the path to the main folder of the project
@@ -52,19 +53,38 @@ class CollectableGenerator:
 
         self.attributes_names = tuple(attribute_names)
 
-    def createCollectable(self):
+    def createCollectable(self, method):
         '''
-        This function create a new collectable. TODO: strategy for attribute selection
+        This function create a new collectable. 
+
+        TODO: implement more sophysticated methods for attribute selection
         '''
         id_number = len(self.collectables) + 1
         # TODO: decide how to choose the attributes
         attributes_values = []
-        new_collectable = Collectable(self.project, id_number, self.attributes_names, attributes_values)
-        self.collectables.append(new_collectable)
+        attributes_imgs = []
+        # choose the attributes randomly all with the same probability
+        if method == 'random_uniform':
+            for layer in self.attributes.keys():
+                # choose randomly between the attributes of the attribute dictionary
+                choosen_attribute = random.choice(list(self.attributes[layer][1]))
+                choosen_attribute_img = self.attributes[layer][1][choosen_attribute]
+                attributes_values.append(choosen_attribute)
+                attributes_imgs.append(choosen_attribute_img)
+        
+        new_collectable = Collectable(self.project, id_number, self.attributes_names, attributes_values, attributes_imgs)
+        # add the new collectable to the collection only if it is not already available 
+        if not new_collectable.identifier in self.collectables:
+            self.collectables[new_collectable.identifier] = new_collectable
+        else:
+            print('[WARNING]\n{}\nalready in current collectables collection.\n\n'.format(new_collectable))
+
 
 
     def __str__(self):
         return 'Collectable generator of {} project.\nActual number of collectables = {}\n'.format(self.project, len(self.collectables))
+
+
 
         '''
         Attributes:
