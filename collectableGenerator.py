@@ -82,16 +82,22 @@ class CollectableGenerator:
         # add the new collectable to the collection only if it is not already available 
         if not new_collectable.identifier in self.collectables:
             self.collectables[new_collectable.identifier] = new_collectable
+            return 1
         else:
             print('[WARNING]\n{}\nalready in current collectables collection.\n\n'.format(new_collectable))
+            return 0
 
-    def createCollectableCollection(self, collectable_number):
+    def createCollectableCollection(self, collectable_desired_number, method):
         '''
         This function create a collection of #collectable_number colletables. If a collectable
         is already part of the collection it is not duplicated, therefore all the collectables 
         inside the collection are unique.
         '''
-        pass
+        collectables_to_be_created = min(collectable_desired_number, self.total_possible_collectables) 
+        
+        while collectables_to_be_created != len(self.collectables):
+            _ = self.createCollectable(method)
+        print('Created {} collectables.'.format(len(self.collectables)))
 
 
     def __str__(self):

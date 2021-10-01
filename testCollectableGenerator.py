@@ -10,6 +10,9 @@ def main():
     collectableGenerator.createCollectable('random_uniform')
 
     print(collectableGenerator)
+
+    collectableGenerator.createCollectableCollection(100, 'random_uniform')
+
     for collectable in collectableGenerator.collectables:
         print(collectableGenerator.collectables[collectable])
 
