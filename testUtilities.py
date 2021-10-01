@@ -5,8 +5,8 @@ import pdb
 # pdb.set_trace() for DEBUGGING
 
 def test_stackLayers():
-    bg_layer_path = 'TestProject/images/BG/BG-GREEN.png'
-    core_layer_path = 'TestProject/images/CORE/CORE-BLU.png'
+    bg_layer_path = 'TestProject/source_layers/00-BG/BG-GREEN.png'
+    core_layer_path = 'TestProject/source_layers/01-CORE/CORE-BLU.png'
 
     bg_layer = cv.imread(bg_layer_path, cv.IMREAD_UNCHANGED)
     core_layer = cv.imread(core_layer_path, cv.IMREAD_UNCHANGED)
@@ -43,11 +43,12 @@ def test_metadataJsonImport():
         print('\n{} = {}'.format(key, metadata[key]))
 
 def main():
-    # test_stackLayers()
+    print('------------------test_stackLayers-----------------------')
+    test_stackLayers()
     print('------------------test_metadataJsonExport----------------')
     test_metadataJsonExport()
     print('---------------------------------------------------------\n')
-    print('------------------test_metadataJsonExport----------------')
+    print('------------------test_metadataJsonImport----------------')
     test_metadataJsonImport()
     print('---------------------------------------------------------\n')
 
