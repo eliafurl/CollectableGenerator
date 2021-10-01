@@ -4,20 +4,23 @@ from utilities import *
 import os
 from os.path import isdir, join
 import random
+from cv2 import imwrite
 
 class CollectableGenerator:
     def __init__(self, project, project_folder):
-        # Dictionary containing all the collectables objects and their identifier as key
+        # sictionary containing all the collectables objects and their identifier as key
         self.collectables = {}
-        # String of the project name
+        # string of the project name
         self.project = project
-        # String of the path to the main folder of the project
+        # string of the path to the main folder of the project
         self.project_folder = project_folder
-        attributes_path = join(project_folder, 'source_layers')
+        # export directory for the collectables inside the project collection
+        self.export_folder = join(project_folder, 'exported_collectables')
         # dictionary for storing all the layers and its attributes name and location
         self.attributes = {}
         self.attributes_names = -1
         self.total_possible_collectables = -1
+        attributes_path = join(project_folder, 'source_layers')
         self.loadAttributes(attributes_path)
 
     def loadAttributes(self,attributes_path):
@@ -99,6 +102,19 @@ class CollectableGenerator:
             _ = self.createCollectable(method)
         print('Created {} collectables.'.format(len(self.collectables)))
 
+    def exportCollectableCollection(self):
+        '''
+        This function exports each collectable as individual image inside the self.export_folder
+        with the correspondent metadata as json file. 
+        '''
+        for collectable_key in self.collectables.keys():
+            collectable = self.collectables[collectable_key]
+            # create the collectable image stacking all the attributes
+            img = collectable.exportCollectable()
+            # export the image
+            imwrite('{}/{}.png'.format(self.export_folder, collectable.name), img)
+            # export the metadata
+            collectable.exportMetadata('{}/{}.json'.format(self.export_folder, collectable.name))
 
     def __str__(self):
         return 'Collectable generator of {} project.\nActual number of collectables inside the collection= {}/{}\n'\

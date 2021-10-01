@@ -19,6 +19,8 @@ def main():
     print('Total possible collectables = {}'.format(collectableGenerator.total_possible_collectables))
 
 
+    print('---------test exportCollectableCollection---------')
+    collectableGenerator.exportCollectableCollection()
 
 if __name__ == '__main__':
     main()
