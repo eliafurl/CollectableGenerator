@@ -17,6 +17,7 @@ class CollectableGenerator:
         # dictionary for storing all the layers and its attributes name and location
         self.attributes = {}
         self.attributes_names = -1
+        self.total_possible_collectables = -1
         self.loadAttributes(attributes_path)
 
     def loadAttributes(self,attributes_path):
@@ -30,6 +31,8 @@ class CollectableGenerator:
         # store in a dictionary an item for each layer with:
         # key = layer_number
         # value = (attribute_name, attribute_dictionary)
+        self.total_possible_collectables = 1
+        current_layer_attributes = 0
         attribute_names = []
         for attribute_dir in sorted(attributes_dir):
 
@@ -43,6 +46,7 @@ class CollectableGenerator:
 
                 for attribute in os.listdir(join(attributes_path, attribute_dir)):
 
+                    current_layer_attributes += 1
                     temp = attribute.split('-')
                     key = temp[1][:-4]
                     value = join(attributes_path, attribute_dir, attribute)
@@ -50,6 +54,8 @@ class CollectableGenerator:
 
                 attribute_layer = attribute_dir.split('-')[0]
                 self.attributes[layer_number] = (attribute_name, attribute_dictionary)
+                self.total_possible_collectables *= current_layer_attributes
+            current_layer_attributes = 0
 
         self.attributes_names = tuple(attribute_names)
 
@@ -79,10 +85,18 @@ class CollectableGenerator:
         else:
             print('[WARNING]\n{}\nalready in current collectables collection.\n\n'.format(new_collectable))
 
+    def createCollectableCollection(self, collectable_number):
+        '''
+        This function create a collection of #collectable_number colletables. If a collectable
+        is already part of the collection it is not duplicated, therefore all the collectables 
+        inside the collection are unique.
+        '''
+        pass
 
 
     def __str__(self):
-        return 'Collectable generator of {} project.\nActual number of collectables = {}\n'.format(self.project, len(self.collectables))
+        return 'Collectable generator of {} project.\nActual number of collectables inside the collection= {}/{}\n'\
+        .format(self.project, len(self.collectables), self.total_possible_collectables)
 
 
 

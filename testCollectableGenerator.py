@@ -13,6 +13,8 @@ def main():
     for collectable in collectableGenerator.collectables:
         print(collectableGenerator.collectables[collectable])
 
+    print('Total possible collectables = {}'.format(collectableGenerator.total_possible_collectables))
+
 
 
 if __name__ == '__main__':
