@@ -46,7 +46,7 @@ class Collectable:
         - create IPFS URI
         - author
         '''
-        metadata = { 'name': '{}-{}.png'.format(self.project, self.id),\
+        metadata = { 'name': '{}-{}'.format(self.project, self.id),\
                      'project': self.project,\
                      'numberID': self.id,\
                      'hashID': self.identifier,\
