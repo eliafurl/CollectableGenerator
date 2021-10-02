@@ -1,13 +1,13 @@
 {
-    "name": "Test-10.png",
+    "name": "Test-10",
     "project": "Test",
     "numberID": 10,
-    "hashID": 1149077199506616188,
+    "hashID": 1199042274249159380,
     "image": "IPFS URI",
     "attributes": [
-        "GREEN",
-        "GREEN",
-        "2"
+        "BG: GREEN",
+        "CORE: GREEN",
+        "STAR: 2"
     ],
     "author": "me"
 }

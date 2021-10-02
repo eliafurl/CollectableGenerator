@@ -51,7 +51,8 @@ class Collectable:
                      'numberID': self.id,\
                      'hashID': self.identifier,\
                      'image': 'IPFS URI',\
-                     'attributes': list(self.attributes_values),\
+                     'attributes': ['{}: {}'.format(attribute_name, attributes_value) \
+                     for attribute_name, attributes_value in zip(self.attributes_names, self.attributes_values)],\
                      'author': 'me',
                     }
         metadataJsonExport(metadata, json_export_file)
